@@ -1,0 +1,13 @@
+{% extends 'cms/detail.html' %}
+
+{% block admin %}
+    <form action="{% url 'cms:approve' article.id %}" method="post">
+    {% csrf_token %}
+        <input type="submit" value="Approve" />
+    </form>
+
+    <form action="{% url 'cms:reject' article.id %}" method="get">
+    {% csrf_token %}
+        <input type="submit" value="Reject" />
+    </form>
+{% endblock %}

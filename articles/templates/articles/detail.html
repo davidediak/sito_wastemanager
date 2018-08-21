@@ -1,0 +1,13 @@
+<h1> {{ article.title }} </h1>
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+Author:{{article.author}}
+
+<br>
+<p>{{article.content}}</p>
+<br>
+
+{% block admin %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% if latest_pending_articles %}
+    <ul>
+        {% for a in latest_pending_articles %}
+            <li>
+                        <a href="{% url 'cms:detail' a.id %}"> {{ a.title }} </a>   status:  {{ a.status }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p> no pending articles available.</p>
+{% endif %}

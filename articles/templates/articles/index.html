@@ -1,0 +1,13 @@
+Most recent articles:
+<br>
+{% if latest_pending_articles %}
+    <ul>
+        {% for article in latest_pending_articles %}
+            <li>
+                <a href="{% url 'articles:detail' article.id %}"> {{ article.title }} </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p> no pending articles available.</p>
+{% endif %}

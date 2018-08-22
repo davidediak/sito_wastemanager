@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'users',
     'articles',
     'cms',
+    'crm',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

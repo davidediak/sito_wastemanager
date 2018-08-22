@@ -10,6 +10,7 @@ class Article(models.Model):
     content = models.TextField()
     pub_date = models.DateTimeField("date pubished")
     status = models.CharField(max_length=20, choices=ARTICLE_STATUS_CHOICES, null=False, default='PENDING')
+
     def isApproved(self):
         if self.status=='APPROVED':
             return True

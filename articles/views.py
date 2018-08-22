@@ -4,6 +4,7 @@ from .forms import WriteArticleForm
 from django.http import HttpResponse
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from crm.models import ArticleHit, SessionBind
 
 # Create your views here.
 def index(request):
@@ -31,6 +32,15 @@ def write(request):
 
 def detail(request, a_id):
     article =  get_object_or_404(Article, pk=a_id)
+
+    #questo serve per creare una session key anche per gli anon users, di default django non lo fa
+    if not request.session or not request.session.session_key:
+        request.session.save()
+    #conto le visualizzazioni all'articolo, per ogni session key -> articolo.hits += 1
+    if not ArticleHit.objects.filter( article=article, custom_session_key=SessionBind.objects.get(django_session_key=request.session.session_key).id ):
+        hit = ArticleHit(article=article, ip=request.META['REMOTE_ADDR'], created=timezone.now(), custom_session_key=SessionBind.objects.get( django_session_key=request.session.session_key).id )
+        hit.save()
+
     context = {'article': article}
     if article.isPending() & request.user.is_superuser:
         return render(request, "articles/detailAdmin.html", context)

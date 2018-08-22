@@ -1,0 +1,15 @@
+<h1> {{ user.username }} </h1>
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+Name:{{user.first_name}}
+<br>
+Surname:{{user.last_name}}
+<br>
+email:{{user.email}}
+<br>
+member since:{{user.date_joined}}
+<br>
+contacts:
+
